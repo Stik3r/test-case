@@ -19,8 +19,6 @@ public class GameController : MonoBehaviour
     public GameObject gameOverPanel;    //UI элементы
     public GameObject resultScore;
 
-    private int maxBigMeteor = 4;
-    private int bigMeteors = 0;
     private int maxUfo = 2;
 
     private float timer;
@@ -92,29 +90,29 @@ public class GameController : MonoBehaviour
         {
             GameObject m = EnemyControl.SpawnMeteor();
             EnemyControl.CreateNewMeteor(ref m, true);
-            bigMeteors++;
+            EnemyControl.bigMeteors++;
             return;
         }
 
-        if(bigMeteors < maxBigMeteor && EnemyControl.ufos.Count < maxUfo)
+        if(EnemyControl.bigMeteors < EnemyControl.maxBigMeteors && EnemyControl.ufos.Count < maxUfo)
         {
             int flip = Random.Range(0, 2);
             if (flip == 0)
             {
                 GameObject m = EnemyControl.SpawnMeteor(); 
                 EnemyControl.CreateNewMeteor(ref m, true);
-                bigMeteors++;
+                EnemyControl.bigMeteors++;
             } 
             else
                 EnemyControl.CreateNewUFO(EnemyControl.SpawnUfos());
             return;
         }
 
-        if(bigMeteors < maxBigMeteor)
+        if(EnemyControl.bigMeteors < EnemyControl.maxBigMeteors)
         {
             GameObject m = EnemyControl.SpawnMeteor();
             EnemyControl.CreateNewMeteor(ref m, true);
-            bigMeteors++;
+            EnemyControl.bigMeteors++;
         }
         else
             EnemyControl.CreateNewUFO(EnemyControl.SpawnUfos());

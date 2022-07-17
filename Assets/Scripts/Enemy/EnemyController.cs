@@ -12,6 +12,9 @@ public static class EnemyControl
     public static GameObject[] meteorsPrefab;
     public static GameObject ufo;
 
+    public static int bigMeteors = 0;
+    public static int maxBigMeteors = 4;
+
     public static void CreateNewUFO(GameObject ufo)
     {
         ufos.Add(ufo);
@@ -22,7 +25,6 @@ public static class EnemyControl
         buf.x = 0;
         buf.y = 0;
         meteor.transform.rotation = Quaternion.Euler(buf);
-
         meteor.GetComponent<Meteor>().speed = meteorsSpeed[Random.Range(0, meteorsSpeed.Length)];
         if (isBig)
         {
@@ -45,6 +47,10 @@ public static class EnemyControl
 
     public static void DestroyMeteor(GameObject meteor)
     {
+        if(meteor.GetComponent<Meteor>().meteorLvL == 0)
+        {
+            bigMeteors--;
+        }
         meteors.Remove(meteor);
     }
 
